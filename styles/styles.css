@@ -1,3 +1,27 @@
+p, h1, h2, div {
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-size: 3vw;
+    margin: 1vw;
+}
+
+h2 {
+    font-size: 2vw;
+}
+
+p {
+    font-size: 1.3vw;
+    padding: 0.5vw;
+}
+
+button {
+    font-size: 1.3vw;
+    margin: 0.5vw;
+}
+
 .flex-center {
     display: flex;
     justify-content: center;
@@ -7,5 +31,37 @@
 .flex-column {
     display: flex;
     flex-direction: column;
+}
+
+.flex-space-evenly {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.flex-grow-cross {
+    align-self: stretch;
+}
+
+.bordered {
+    border: 0.1vw solid black;
+}
+
+.margin-medium {
+    margin: 3vw;
+}
+
+.padding-small {
+    padding: 1.5vw;
+}
+
+.invisible-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#input-screen-wrapper {
+    width: 60vw;
 }
 

@@ -8,10 +8,52 @@
     <title>Scheveningen</title>
 </head>
 <body>
-    <div class="flex-column flex-center">
-        <h1>Chess</h1>
-        <h2>Club</h2>
-    </div>
+    <main class="flex-center">
+        <div id="input-screen-wrapper" class="flex-column flex-center">
+            <h1>Input Tournament Information</h1>
+            <div class="flex-center flex-grow-cross flex-space-evenly">
+                <div class="flex-column flex-center">
+                    <p>Team 1</p>
+                    <button class="invisible-button" id="team-name-button-1">
+                        <h2 id="team-name-1">HLSS</h2>
+                    </button>
+                    <div class="flex-column flex-center bordered">
+                        <div class="flex-column flex-center padding-small" id="team-list-1">
+                            <p>Brian Zhang</p>
+                            <p>Siddh Patel</p>
+                            <p>Suhas Unni</p>
+                            <p>Jonah Perez</p>
+                            <p>Zain Malik</p>
+                        </div>
+                        <div class="flex-center">
+                            <button id="add-1">Add</button>
+                            <button id="remove-1">Remove</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-column flex-center">
+                    <p>Team 2</p>
+                    <button class="invisible-button" id="team-name-button-2">
+                        <h2 id="team-name-2">LMASS</h2>
+                    </button>
+                    <div class="flex-column flex-center bordered">
+                        <div class="flex-column flex-center padding-small" id="team-list-2">
+                            <p>Brian Zhang</p>
+                            <p>Siddh Patel</p>
+                            <p>Suhas Unni</p>
+                            <p>Jonah Perez</p>
+                            <p>Zain Malik</p>
+                        </div>
+                        <div class="flex-center">
+                            <button id="add-2">Add</button>
+                            <button id="remove-2">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="margin-medium" id="continue-button">Continue</button>
+        </div>
+    </main>
 
 </body>
 </html>
