@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="scripts/index.js" defer></script>
+    <title>Scheveningen - Round Details</title>
+</head>
+<body>
+    <main class="flex-center">
+        <div id="input-screen-wrapper" class="flex-column flex-center">
+            <h1>Round 1</h1>
+            <table>
+                <tr>
+                    <th>Board</th>
+                    <th>HLSS</th>
+                    <th>Result</th>
+                    <th>LMASS</th>
+                </tr>
+                <!-- When inserting rows in javascript table, maybe attach id to elements for later reference. Example below. -->
+                <!-- Perhaps click a name to input who won, or click both names to input draw (click would have to check if
+                    result is currently 1-0 or 0-1, and if so, change to 1/2-1/2) -->
+                <tr>
+                    <td id="1-board">1</td>
+                    <td id="1-name1"><button class="invisible-button">Brian Zhang</button></td>
+                    <td id="1-result">1-0</td>
+                    <td id="1-name2"><button class="invisible-button">Suhas Unni</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><button class="invisible-button">Brian Zhang</button></td>
+                    <td>1&frasl;2-1&frasl;2</td>
+                    <td><button class="invisible-button">Suhas Unni</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><button class="invisible-button">Brian Zhang</button></td>
+                    <td>0-0</td>
+                    <td><button class="invisible-button">Suhas Unni</button></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><button class="invisible-button">Brian Zhang</button></td>
+                    <td>0-0</td>
+                    <td><button class="invisible-button">Suhas Unni</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><button class="invisible-button">Brian Zhang</button></td>
+                    <td>0-0</td>
+                    <td><button class="invisible-button">Suhas Unni</button></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><button class="invisible-button">Brian Zhang</button></td>
+                    <td>0-0</td>
+                    <td><button class="invisible-button">Suhas Unni</button></td>
+                </tr>
+            </table>
+            <button class="margin-medium" id="continue-button">Continue</button>
+        </div>
+    </main>
+
+</body>
+</html>
