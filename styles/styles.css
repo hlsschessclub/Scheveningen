@@ -51,8 +51,16 @@ table, td, th {
     align-self: stretch;
 }
 
+.flex-right-justify {
+    align-self: flex-end;
+}
+
 .bordered {
     border: 0.1vw solid black;
+}
+
+.margin-small {
+    margin: 1vw;
 }
 
 .margin-medium {
