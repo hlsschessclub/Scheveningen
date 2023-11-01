@@ -1,18 +1,3 @@
-// Create some test data and push
-let players = [
-    {
-        "name":"Siddh",
-        "age":"17",
-        "school":"HLSS",
-    },
-
-    {
-        "name":"Brian",
-        "age":"17",
-        "school":"LMASS",
-    }
-]
-
 // Read
 // let req = new XMLHttpRequest();
 // let local; 
