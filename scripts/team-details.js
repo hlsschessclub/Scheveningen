@@ -8,6 +8,7 @@ let data = {
     "team2-name": "Team 2",
     "team1-score": 0,
     "team2-score": 0,
+    "current-round": 1, 
   },
   "players": [
     // {
@@ -17,6 +18,9 @@ let data = {
     //   "last-name": lname,
     //   "grade": grade
     // }
+  ],
+  "matchups": [
+    
   ]
 };
 
@@ -178,7 +182,11 @@ async function sendData(packet) {
   }
 }
 
+// Compute matchmaking and append to json data
+
+
 // Continue button
 const continueButton = document.querySelector('#continue-button');
 continueButton.addEventListener('click', () => {sendData(data)});
+
 //window.location.href = "round-details.html"; <- direct to next page
