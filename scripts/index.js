@@ -18,18 +18,34 @@
 // req.send();
 
 // Write
-req = new XMLHttpRequest();
+// req = new XMLHttpRequest();
 
-req.onreadystatechange = () => {
-  if (req.readyState == XMLHttpRequest.DONE) {
-    console.log(req.responseText);
-  }
-};
+// req.onreadystatechange = () => {
+//   if (req.readyState == XMLHttpRequest.DONE) {
+//     console.log(req.responseText);
+//   }
+// };
 
-req.open("PUT", "https://api.jsonbin.io/v3/b/6542b49d12a5d376599392e1/", true);
-req.setRequestHeader("Content-Type", "application/json");
-req.setRequestHeader("$2a$10$SCXldiQdzrsVLdCXWgOLi.qgj8X5Zh34LJ67hDPYms1oy7KQQKJEK","$2a$10$oGTcITKnBmM9y.nMnfL8o.XjXWbVByJSRoi8qk1v2BqjIm78YvL12");
-req.send(JSON.stringify(players));
+// req.open("PUT", "https://api.jsonbin.io/v3/b/6542b49d12a5d376599392e1/", true);
+// req.setRequestHeader("Content-Type", "application/json");
+// req.setRequestHeader("$2a$10$SCXldiQdzrsVLdCXWgOLi.qgj8X5Zh34LJ67hDPYms1oy7KQQKJEK","$2a$10$oGTcITKnBmM9y.nMnfL8o.XjXWbVByJSRoi8qk1v2BqjIm78YvL12");
+// req.send(JSON.stringify(players));
 
 // Collect all player data and store in an object (players)
 // Send all of the data out to the bin when the page is continued
+
+// fetch('https://api.jsonbin.io/v3/b/6542b49d12a5d376599392e1/latest')
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+
+// (async () => {
+//   const res = await fetch('https://api.jsonbin.io/v3/b/6542b49d12a5d376599392e1/latest');
+
+//   if(!res.ok) {
+//     throw new Error(`'Request failed with status code: ${res.status}`);
+//   }
+
+//   const data = await res.json();
+
+//   console.log(data);
+// })();

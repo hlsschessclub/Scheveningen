@@ -18,14 +18,8 @@
                         <h2 id="team-name-1">HLSS</h2>
                     </button>
                     <div class="flex-column flex-center bordered">
-                        <div class="flex-column flex-center padding-small" id="team-list-1">
-                            <button class="invisible-button">Brian Zhang</button>
-                            <button class="invisible-button">Siddh Patel</button>
-                            <button class="invisible-button">Suhas Unni</button>
-                            <button class="invisible-button">Jonah Perez</button>
-                            <button class="invisible-button">Zain Malik</button>
-                        </div>
-                        <button id="add-1">+</button>
+                        <div class="flex-column flex-center padding-small" id="team-list-1"></div>
+                        <button id="add-team-1">+</button>
                     </div>
                 </div>
                 <div class="flex-column flex-center">
@@ -34,15 +28,35 @@
                         <h2 id="team-name-2">LMASS</h2>
                     </button>
                     <div class="flex-column flex-center bordered">
-                        <div class="flex-column flex-center padding-small" id="team-list-2">
-                            <button class="invisible-button">Brian Zhang</button>
-                            <button class="invisible-button">Siddh Patel</button>
-                            <button class="invisible-button">Suhas Unni</button>
-                            <button class="invisible-button">Jonah Perez</button>
-                            <button class="invisible-button">Zain Malik</button>
-                        </div>
-                        <button id="add-2">+</button>
+                        <div class="flex-column flex-center padding-small" id="team-list-2"></div>
+                        <button id="add-team-2">+</button>
                     </div>
+                </div>
+            </div>
+            <!-- Modal for team names -->
+            <div id="team-name-modal" class="modal">
+                <div class="modal-content">
+                <h2 id="team-name-modal-title">Enter Team Name</h2>
+                <form>
+                    <label for="team-name-input">Team Name:</label>
+                    <input type="text" id="team-name-input"><br>
+                    <button id="team-modal-submit-button" type="button">Submit</button>
+                </form>
+                </div>
+            </div>    
+            <!-- Modal for player information -->
+            <div id="player-information-modal" class="modal">
+                <div class="modal-content">
+                <h2 id="player-information-modal-title">Enter Player Information</h2>
+                <form>
+                    <label for="first-name-input">First Name:</label>
+                    <input type="text" id="first-name-input"><br>
+                    <label for="last-name-input">Last Name:</label>
+                    <input type="text" id="last-name-input"><br>
+                    <label for="grade-input">Grade:</label>
+                    <input type="number" id="grade-input"><br>
+                    <button id="player-modal-submit-button" type="button">Submit</button>
+                </form>
                 </div>
             </div>
             <button class="margin-medium" id="continue-button">Continue</button>
