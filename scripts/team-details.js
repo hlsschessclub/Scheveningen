@@ -26,9 +26,6 @@ let data = {
   ],
   "schedule": [
     
-  ],
-  "results": [
-
   ]
 };
 
@@ -118,7 +115,7 @@ function openAddPlayerModal(team) {
   // Close modal if user clicks off
   window.onclick = function(event) {
     if (event.target == modal) {
-      closeModal('player-information-update-modal');
+      closeModal('player-information-modal');
     }
   }
 }
@@ -266,6 +263,8 @@ function matchMaking(){
 
   console.log(allPlayersTeam1);
   console.log(allPlayersTeam2);
+
+  
   
   //now that the IDs are sorted, it is just a matter of pairing every one from
   //team 1 with everyone else from team b exactly once
