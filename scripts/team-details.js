@@ -17,11 +17,6 @@ let data = {
     //   "first-name": fname,
     //   "last-name": lname,
     //   "grade": grade
-    //   "schedule": [
-    //    1:"black"  -> ID of the person they are playing: starting colour
-    //    2:"white"
-    //    3:"black"
-    //    ]       
     // }
   ],
   "schedule": [
@@ -263,12 +258,9 @@ function matchMaking(){
 
   console.log(allPlayersTeam1);
   console.log(allPlayersTeam2);
-
-  
   
   //now that the IDs are sorted, it is just a matter of pairing every one from
   //team 1 with everyone else from team b exactly once
-
 }
 
 // Continue button
