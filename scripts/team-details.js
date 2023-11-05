@@ -17,6 +17,11 @@ let data = {
     //   "first-name": fname,
     //   "last-name": lname,
     //   "grade": grade
+    //   "schedule": [
+    //    1:"black"  -> ID of the person they are playing: starting colour
+    //    2:"white"
+    //    3:"black"
+    //    ]       
     // }
   ],
   "matchups": [
@@ -110,6 +115,52 @@ function openAddPlayerModal(team) {
   // Set the submit button to add the player to the correct team
   var modalButton = document.getElementById('player-modal-submit-button')
   modalButton.onclick = function() {addPlayer(team)};
+
+  //code to close window if the user clicks off of it
+  window.onclick = function(event) {
+
+    if (event.target == modal) {
+ 
+       modal.style.display = "none";
+ 
+     }
+  }
+
+}
+
+function openUpdatePLayerModal(id){
+  var player = data.players[id-1];
+  console.log(player);
+  var modal = document.getElementById('player-information-update-modal');
+  modal.style.display = 'block';
+
+  //closes the window if user clicks off of it
+  window.onclick = function(event) {
+
+    if (event.target == modal) {
+ 
+       modal.style.display = "none";
+ 
+     }
+  }
+  
+  // Change title of modal depending on which player is being selected
+  var modalTitle = document.getElementById('player-information-update-modal-title')
+  modalTitle.textContent = `Update information for player ${player["first-name"]} ${player["last-name"]}`;
+
+  // Access the current player data and set the input boxes to that text
+  document.getElementById('first-name-update-input').value = player["first-name"];
+  document.getElementById('last-name-update-input').value = player["last-name"];
+  document.getElementById('grade-update-input').value = player["grade"];
+  
+  //Set the subimt button to update the player on the team
+  var modalButton = document.getElementById('player-modal-update-submit-button')
+  modalButton.onclick = function() {updatePlayer(player)};
+
+  var deletePlayerButton = document.getElementById('player-modal-update-delete-button');
+  deletePlayerButton.onclick = function() {deletePlayer(player["id"]-1)}; //sends the index of the player in the JSON
+
+  
 }
 
 function addPlayer(team) {
@@ -117,10 +168,10 @@ function addPlayer(team) {
   var fName = document.getElementById('first-name-input').value;
   var lName = document.getElementById('last-name-input').value;
   var grade = document.getElementById('grade-input').value;
-
+  var id = data["match-information"]["total-players"] + 1;
   // Update the JSON
   let newPlayer = {
-    "id": data["match-information"]["total-players"] + 1,
+    "id": id,
     "team": team,
     "first-name": fName,
     "last-name": lName,
@@ -132,11 +183,12 @@ function addPlayer(team) {
   data["match-information"]["total-players"] = data.players.length;
   data["match-information"][`team${team}-players`]++;
 
-  // Create a new button
+  // Create a new button to submit
   var newButton = document.createElement("button");
   newButton.textContent = `${fName} ${lName}`;
   newButton.className = "invisible-button";
-  newButton.onclick = function(){updatePlayer()};
+  newButton.onclick = function(){openUpdatePLayerModal(id)};
+  
 
   // Append button to respective team div
   var teamDiv = document.getElementById(`team-list-${team}`); // Replace "team${team}-div" with your actual div ID
@@ -146,18 +198,41 @@ function addPlayer(team) {
   closeModal('player-information-modal');
 }
 
-// Add functionality 
-function updatePlayer() {
-  // find the players information from the data object and populate the fields with it
-  // update the information in the json with the new stuff
-  // update the button if the name changes?
-  // close modal
+
+// Add functionality to update player names if nescessary
+function updatePlayer(player) {
+  console.log("update player has been called");
+
+  var fName = document.getElementById('first-name-update-input').value;
+  var lName = document.getElementById('last-name-update-input').value;
+  var grade = document.getElementById('grade-update-input').value;
+
+  player["first-name"] = fName;
+  player["last-name"] = lName;
+  player["grade"] = grade;
+
+  console.log(player);
+
+  closeModal('player-information-update-modal');
+
+  
+  //find a way to update the button when the name changes
 }
 
-function deletePlayer() {
+//this function is a bit wonky, it deletes the button and player from the JSON,
+//but then immediately refreshes the website????
+function deletePlayer(id) {
+  console.log('delete player called');
+  delete data.players[id];
+  data.match
+  console.log(data);
+  data["match-information"]["total-players"] --;
+  data["match-information"][`team${data.players[id]["team"]}-players`]--;
   // remove player from the json
   // update total counts
   // close modal
+
+  closeModal("player-information-update-modal");
 }
 
 // ---------- SEND DATA AND CONTINUE ----------
@@ -183,10 +258,36 @@ async function sendData(packet) {
 }
 
 // Compute matchmaking and append to json data
+function matchMaking(){
+  //matchmaking algorithm here
 
+  //sorts all the IDs into those who are on team 1 and those on team 2
+  const allPlayersTeam1 = [];
+  const allPlayersTeam2 = [];
+  for(let i = 0; i<data.players.length; i++){
+    let player = data.players[i];
+    if (player["team"]==1){
+      allPlayersTeam1.push(player["id"]);
+    }
+    else{
+      allPlayersTeam2.push(player["id"]);
+    }
+  }
+
+  console.log(allPlayersTeam1);
+  console.log(allPlayersTeam2);
+  
+  //now that the IDs are sorted, it is just a matter of pairing every one from
+  //team 1 with everyone else from team b exactly once
+
+}
 
 // Continue button
 const continueButton = document.querySelector('#continue-button');
-continueButton.addEventListener('click', () => {sendData(data)});
+continueButton.addEventListener('click', () => {
+  //sendData(data)
+  console.log(data)
+  matchMaking()});
+
 
 //window.location.href = "round-details.html"; <- direct to next page
