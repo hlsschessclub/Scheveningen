@@ -285,7 +285,8 @@ function matchMaking(){
 // Continue button
 const continueButton = document.querySelector('#continue-button');
 continueButton.addEventListener('click', () => {
-  sendData(data)
+  //sendData(data)
+  matchMaking()
   //window.location.href = "round-details.html"; <- direct to next page
 });
 
