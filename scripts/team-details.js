@@ -20,7 +20,19 @@ let data = {
     // }
   ],
   "schedule": [
-    
+    //round list
+    [
+      //board 1
+      {
+        "white":"", //id of white  player
+        "black":"", // id of black player
+        "outcome":0 //id of player who wins or 0 if draw, -1 initially to denote undetermined
+      },
+      //board 2
+      {
+
+      }
+    ]
   ]
 };
 
