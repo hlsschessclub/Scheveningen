@@ -14,11 +14,22 @@ async function fetchData() {
 
 // fetchData();
 
-// The information that needs to be accessed is the player info,
-// Should the matchups be compiled prior to the round start?
+// Set header of page to round number
+const pageHeader = document.querySelector('#round-details-title');
+pageHeader.textContent = `Round ${data["match-information"]["current-round"]}`;
+
+// Set column titles to team names
+const columnTeam1 = document.querySelector('#team-name-1');
+const columnTeam2 = document.querySelector('#team-name-2');
+
+columnTeam1.textContent = data["match-information"]["team1-name"];
+columnTeam2.textContent = data["match-information"]["team2-name"];
+
+// Access current round matchups and sort players on each board based on standings
+// Set the score to " - "
+// Create buttons for each player so user can click on each
+
+// Add functionality for selecting winners/losers/draws
 
 
-
-
-// calculate the round and place players in specific slots
-// add functionality for selecting winners
+// Push data to JSONBin and move to the next round

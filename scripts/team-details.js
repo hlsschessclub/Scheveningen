@@ -187,6 +187,8 @@ async function sendData(packet) {
 
 // Continue button
 const continueButton = document.querySelector('#continue-button');
-continueButton.addEventListener('click', () => {sendData(data)});
+continueButton.addEventListener('click', () => {
+  sendData(data)
+  //window.location.href = "round-details.html"; <- direct to next page
+});
 
-//window.location.href = "round-details.html"; <- direct to next page
