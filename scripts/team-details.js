@@ -22,16 +22,6 @@ let data = {
   "schedule": [
     //round list
     [
-      //board 1
-      {
-        "white":"", //id of white  player
-        "black":"", // id of black player
-        "outcome":0 //id of player who wins or 0 if draw, -1 initially to denote undetermined
-      },
-      //board 2
-      {
-
-      }
     ]
   ]
 };
@@ -254,32 +244,76 @@ async function sendData(packet) {
 // Compute matchmaking and append to json data
 function matchMaking(){
   //matchmaking algorithm here
-
+  function generateScheveningenPairings(teamA, teamB) {
+    const rounds = [];
+    const totalRounds = teamA.length;
+  
+    for (let round = 0; round < totalRounds; round++) {
+      const roundPairings = [];
+      for (let i = 0; i < teamA.length; i++) {
+        const playerA = teamA[i];
+        const playerB = teamB[(i + round) % teamA.length];
+        roundPairings.push([playerA, playerB]);
+      }
+      rounds.push(roundPairings);
+    }
+    return rounds;
+  }
   //sorts all the IDs into those who are on team 1 and those on team 2
-  const allPlayersTeam1 = [];
-  const allPlayersTeam2 = [];
+  const allPlayersTeamA = [];
+  const allPlayersTeamB = [];
   for(let i = 0; i<data.players.length; i++){
     let player = data.players[i];
     if (player["team"]==1){
-      allPlayersTeam1.push(player["id"]);
+      allPlayersTeamA.push(player["id"]);
     }
     else{
-      allPlayersTeam2.push(player["id"]);
+      allPlayersTeamB.push(player["id"]);
     }
   }
 
-  console.log(allPlayersTeam1);
-  console.log(allPlayersTeam2);
-  
-  //now that the IDs are sorted, it is just a matter of pairing every one from
-  //team 1 with everyone else from team b exactly once
+  console.log(allPlayersTeamA);
+  console.log(allPlayersTeamB);
+
+  const pairings = generateScheveningenPairings(allPlayersTeamA,allPlayersTeamB);
+
+  //declare board template for each game
+  let board = {
+    "white":"",
+    "black":"",
+    "outcome":-1
+}
+
+  pairings.forEach((round, roundNumber) => {
+    //add new array to carry all the boards for that specific round
+    data.schedule.push([]);
+    
+    console.log(`Round ${roundNumber + 1}:`);
+    round.forEach((pairing, index) => {
+        const [playerA, playerB] = pairing;
+        console.log(`Game ${index + 1}: Player ${playerA} (Team A) vs. Player ${playerB} (Team B)`);
+        if(roundNumber%2==0){
+          board["white"] = playerA
+          board["black"] = playerB
+        }else{
+          board["white"] = playerB
+          board["black"] = playerA
+        }
+        console.log("board " + JSON.stringify(board,null,4));//this line works and it p
+        
+        //this line for some reason only adds the board where white is 2, black is 3
+        data.schedule[roundNumber].push(board);
+    });
+});
+data.schedule.pop(); // removes the last unescessary array in the schedule
+console.log(data);
 }
 
 // Continue button
 const continueButton = document.querySelector('#continue-button');
 continueButton.addEventListener('click', () => {
   //sendData(data)
-  //matchMaking()
+  matchMaking()
   //window.location.href = "round-details.html"; <- direct to next page
 });
 
