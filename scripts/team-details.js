@@ -1,4 +1,4 @@
-// JSON Template, still a work in progress
+// JSON Template
 let data = {
   "match-information": {
     "total-players": 0,
@@ -20,13 +20,24 @@ let data = {
     // }
   ],
   "schedule": [
-    //round list
-    [
-    ]
+    // {
+    //   "round": number,
+    //   "games": [
+    //     {
+    //       "playerA": {
+    //         "id": id,
+    //         "color": "White"
+    //       },
+    //       "playerB": {
+    //         "id": id,
+    //         "color": "Black"
+    //       },
+    //       "result": -1
+    //     },
+    //   ]
+    // }
   ]
 };
-
-// console.log(data);
 
 // ---------- CHANGING TEAM NAMES ----------
 // Buttons for changing team names
@@ -219,7 +230,60 @@ function closeModal (id) {
   modal.style.display = 'none';
 }
 
-// ---------- SEND DATA AND CONTINUE ----------
+// ---------- MATCHMAKING ----------
+// Compute matchmaking and append to json data
+async function matchMaking(){
+  // Sorts players into into their teams
+  const teamA = [];
+  const teamB = [];
+  for(let i = 0; i < data.players.length; i++){
+    let player = data.players[i];
+    if (player["team"]==1){
+      teamA.push(player["id"]);
+    }
+    else{
+      teamB.push(player["id"]);
+    }
+  }
+
+  function generateSchedule(teamA, teamB) {
+    const schedule = [];
+    const totalRounds = teamA.length;
+  
+    // Iterate through rounds
+    for (let round = 0; round < totalRounds; round++) {
+      const roundGames = [];
+  
+      // Iteratre through teams and assign matchups
+      for (let i = 0; i < teamA.length; i++) {
+        const playerA = teamA[i];
+        const playerB = teamB[(i + round) % teamA.length];
+        const colors = round % 2 === 0 ? ['White', 'Black'] : ['Black', 'White'];
+        
+        // Push individual game to round
+        roundGames.push({
+          playerA: { id: playerA, color: colors[0] },
+          playerB: { id: playerB, color: colors[1] },
+          result: -1, // Placeholder for result
+        });
+      }
+  
+      // Push round and games to schedule
+      schedule.push({
+        round: round + 1,
+        games: roundGames,
+      });
+    }
+  
+    // Return the completed schedule
+    return schedule;
+  }
+
+  // Call function and modify the JSON
+  data.schedule = generateSchedule(teamA, teamB);
+}
+
+// ---------- SEND DATA ----------
 // Function to send data to the JSONbin
 async function sendData(packet) {
   try {
@@ -236,84 +300,24 @@ async function sendData(packet) {
     }
     const data = await res.json();
     console.log(data);
+    return(data);
   } catch (error) {
     console.error(error);
+    throw(error);
   }
-}
-
-// Compute matchmaking and append to json data
-function matchMaking(){
-  //matchmaking algorithm here
-  function generateScheveningenPairings(teamA, teamB) {
-    const rounds = [];
-    const totalRounds = teamA.length;
-  
-    for (let round = 0; round < totalRounds; round++) {
-      const roundPairings = [];
-      for (let i = 0; i < teamA.length; i++) {
-        const playerA = teamA[i];
-        const playerB = teamB[(i + round) % teamA.length];
-        roundPairings.push([playerA, playerB]);
-      }
-      rounds.push(roundPairings);
-    }
-    return rounds;
-  }
-  //sorts all the IDs into those who are on team 1 and those on team 2
-  const allPlayersTeamA = [];
-  const allPlayersTeamB = [];
-  for(let i = 0; i<data.players.length; i++){
-    let player = data.players[i];
-    if (player["team"]==1){
-      allPlayersTeamA.push(player["id"]);
-    }
-    else{
-      allPlayersTeamB.push(player["id"]);
-    }
-  }
-
-  console.log(allPlayersTeamA);
-  console.log(allPlayersTeamB);
-
-  const pairings = generateScheveningenPairings(allPlayersTeamA,allPlayersTeamB);
-
-  //declare board template for each game
-  let board = {
-    "white":"",
-    "black":"",
-    "outcome":-1
-}
-
-  pairings.forEach((round, roundNumber) => {
-    //add new array to carry all the boards for that specific round
-    data.schedule.push([]);
-    
-    console.log(`Round ${roundNumber + 1}:`);
-    round.forEach((pairing, index) => {
-        const [playerA, playerB] = pairing;
-        console.log(`Game ${index + 1}: Player ${playerA} (Team A) vs. Player ${playerB} (Team B)`);
-        if(roundNumber%2==0){
-          board["white"] = playerA
-          board["black"] = playerB
-        }else{
-          board["white"] = playerB
-          board["black"] = playerA
-        }
-        console.log("board " + JSON.stringify(board,null,4));//this line works and it p
-        
-        //this line for some reason only adds the board where white is 2, black is 3
-        data.schedule[roundNumber].push(board);
-    });
-});
-data.schedule.pop(); // removes the last unescessary array in the schedule
-console.log(data);
 }
 
 // Continue button
 const continueButton = document.querySelector('#continue-button');
-continueButton.addEventListener('click', () => {
-  //sendData(data)
-  matchMaking()
-  //window.location.href = "round-details.html"; <- direct to next page
+continueButton.addEventListener('click', async () => {
+  try {
+    // Wait for matchmaking and data to send to JSONbin
+    await matchMaking();
+    await(sendData(data));
+    window.location.href = "round-details.html"; // Direct to next page
+  }
+  catch {
+    console.error("Error:", error);
+  }  
 });
 
