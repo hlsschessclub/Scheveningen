@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
-    <script src="scripts/index.js" defer></script>
+    <script src="scripts/current-standings.js" defer></script>
     <title>Scheveningen - Team Details</title>
 </head>
 <body>
     <main class="flex-center">
         <div id="cstandings-screen-wrapper" class="flex-column flex-center">
             <h1>Current Standings</h1>
-            <!-- Change in javascript -->
-            <h2>After Round X</h2>
-            <div class="flex-center flex-grow-cross flex-space-evenly">
-                <h1>HLSS&nbsp&nbsp&nbsp10 - 8&nbsp&nbsp&nbspLMASS</h1>
-            </div>
+            <h2 id="round-header">After Round X</h2>
+            <h1 id="team-scores">HLSS&nbsp&nbsp&nbsp10 - 8&nbsp&nbsp&nbspLMASS</h1>
             <table>
                 <!-- Define number of columns in javascript table based on number of platers per team -->
                 <!-- Number of rows would be total number of players -->
@@ -93,7 +90,15 @@
                     <td>0</td>
                 </tr>
             </table>
-            <h1>Time Until Next Round: </h1>
+            
+            <!-- Timer -->
+            <div class="flex-space-evenly">
+                <h1>Time Until Next Round:</h1>
+                <button class="invisible-button" id="timer-button">
+                    <h1 id="timer">00:00</h1>
+                </button>
+            </div>
+
             <button class="margin-medium" id="continue-button">Continue</button>
         </div>
     </main>
