@@ -167,4 +167,14 @@ function toggleTimer() {
 updateTimerDisplay(); // Set display
 toggleTimer(); // Start timer on page load
 
-// Continue button here
+
+// Continue button
+const continueButton = document.querySelector('#continue-button');
+continueButton.addEventListener("click", () => {
+    const currentURL = window.location.href;
+    const relativePath = "/round-details.html"; 
+    newURL = currentURL.split('/');
+    newURL.pop();
+    newURL = newURL.join('/') + relativePath;
+    window.location.href = newURL;
+});
