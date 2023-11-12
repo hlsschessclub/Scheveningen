@@ -124,6 +124,73 @@ const teamScores = document.querySelector("#team-scores");
 teamScores.textContent = `${data["match-information"]["team1-name"]} ${data["match-information"]["team1-score"]} - ${data["match-information"]["team2-score"]}  ${data["match-information"]["team2-name"]}`
 
 // Create table with the data, sorting by total score
+function updateTableData() {
+    // Brian: I couldn't find a rounds variable in the data so I assume 8 is hard-coded
+    const rounds = 8;
+    let totalPlayers = data["match-information"]["total-players"];
+
+    // Create a temporary data object where player id is the key for each player
+    let tempData = new Map();
+
+    // Initialize tempData with player name and team
+    for (let i = 0; i < totalPlayers; ++i) {
+        const player = data.players[i];
+        const fullName = player["first-name"] + ' ' + player["last-name"];
+        const team = player.team === 1 ? data["match-information"]["team1-name"] : data["match-information"]["team2-name"];
+        let curPlayerData = Array(rounds+3);
+        curPlayerData[0] = fullName;
+        curPlayerData[1] = team;
+        curPlayerData[rounds+2] = 0; // A final column which is max score of the player.
+        tempData.set(data.players[i].id, curPlayerData);
+    }
+
+    // Fill in tempData according to round results
+    for (const round of data.schedule) {
+        for (const game of round.games) {
+            const playerA = tempData.get(game.playerA.id);
+            const playerB = tempData.get(game.playerB.id);
+            // Brian: not sure how the "result" variable maps. 
+            // Brian: I'll assume -1 = tbd, 0 = playerA wins, 1 = player B wins, and 2 = draw
+            if (game.result === 0) {
+                playerA[round.round+1] = '1';
+                playerB[round.round+1] = '0';
+                playerA[rounds+2] += 1;
+            } else if (game.result == 1) {
+                playerA[round.round+1] = '0';
+                playerB[round.round+1] = '1';
+                playerB[rounds+2] += 1;
+            } else if (game.result == 2) {
+                playerA[round.round+1] = '1/2';
+                playerB[round.round+1] = '1/2';
+                playerA[rounds+2] += 0.5;
+                playerB[rounds+2] += 0.5;
+            }
+        }
+    }
+    
+    // Sort map by score, descending.
+    const sortedArray = Array.from(tempData);
+    sortedArray.sort((a, b) => b[1][rounds+2] - a[1][rounds+2]);
+    // Pop total score.
+    for (const item of sortedArray) {
+        item[1].pop();
+    }
+
+    // Fill in html table with data
+    const dataTable = document.querySelector('#data-table');
+    for (const playerSet of sortedArray) {
+        const row = document.createElement('tr');
+        const playerData = playerSet[1];
+        for (const playerDataPoint of playerData) {
+            const cell = document.createElement('td');
+            cell.textContent = playerDataPoint;
+            row.appendChild(cell);
+        }
+        dataTable.appendChild(row);
+    }
+}
+updateTableData();
+
 
 // Timer functionality (not final)
 let timerInterval;
