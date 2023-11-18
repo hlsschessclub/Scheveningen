@@ -214,3 +214,10 @@ function updateTableData() {
 updateTableData();
 
 
+// Export button functionality
+const exportButton = document.querySelector('#export-button');
+exportButton.addEventListener('click', () => {
+    const tournamentDataLabel = document.querySelector('#tournament-data-label');
+    tournamentDataLabel.textContent = JSON.stringify(data);
+});
+
