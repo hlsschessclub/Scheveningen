@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
-    <script src="scripts/index.js" defer></script>
+    <script src="scripts/final-standings.js" defer></script>
     <title>Scheveningen - Team Details</title>
 </head>
 <body>
@@ -12,20 +12,17 @@
         <div id="fstandings-screen-wrapper" class="flex-column flex-center">
             <h1>Final Standings</h1>
             <div class="flex-center flex-grow-cross flex-space-evenly">
-                <h1>HLSS&nbsp&nbsp&nbsp12 - 11&nbsp&nbsp&nbspLMASS</h1>
+                <h1 id="team-scores">HLSS&nbsp&nbsp&nbsp12 - 11&nbsp&nbsp&nbspLMASS</h1>
             </div>
             <div class="flex-center flex-grow-cross flex-space-evenly margin-small">
                 <div class="flex-column flex-center">
-                    <h2>MVP: Brian Zhang</h2>
+                    <h2 id="mvp-label-1"></h2>
                 </div>
                 <div class="flex-column flex-center">
-                    <h2>MVP: Siddh Patel</h2>
+                    <h2 id="mvp-label-2"></h2>
                 </div>
             </div>
-            <table>
-                <!-- Define number of columns in javascript table based on number of platers per team -->
-                <!-- Number of rows would be total number of players -->
-                <!-- All information would be inputted from the db -->
+            <table id="data-table">
                 <tr>
                     <th>Player</th>
                     <th>Team</th>
@@ -38,71 +35,12 @@
                     <th>Round 7</th>
                     <th>Round 8</th>
                 </tr>
-                <tr>
-                    <td>Siddh Patel</td>
-                    <td>HLSS</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Brian Zhang</td>
-                    <td>HLSS</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>1/2</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>Suhas Unni</td>
-                    <td>HLSS</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>1/2</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>Jonah Perez</td>
-                    <td>HLSS</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>1/2</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>Zain Malik</td>
-                    <td>HLSS</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>1/2</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>0</td>
-                </tr>
             </table>
             <h2 class="margin-small">Congrats to Everyone Who Played!</h2>
             
             <!-- Figure out where to place this button -->
             <button class="flex-right-justify margin-medium" id="export-button">Export Tournament Data</button>
+            <p id="tournament-data-label"></p>
         </div>
     </main>
 
