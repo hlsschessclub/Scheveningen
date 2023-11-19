@@ -120,10 +120,6 @@ async function main() {
     const roundHeader = document.querySelector("#round-header");
     roundHeader.textContent = `After Round ${data["match-information"]["current-round"]}`;
 
-    // Team Scores
-    const teamScores = document.querySelector("#team-scores");
-    teamScores.textContent = `${data["match-information"]["team1-name"]} ${data["match-information"]["team1-score"]} - ${data["match-information"]["team2-score"]}  ${data["match-information"]["team2-name"]}`
-
     // Create table with the data, sorting by total score
     function updateTableData() {
         // Brian: I couldn't find a rounds variable in the data so I assume 8 is hard-coded
@@ -146,6 +142,9 @@ async function main() {
         }
 
         // Fill in tempData according to round results
+        // Simultaneously accumulate total team scores
+        let teamATotal = 0;
+        let teamBTotal = 0;
         for (const round of data.schedule) {
             for (const game of round.games) {
                 const playerA = tempData.get(game.playerA.id);
@@ -156,15 +155,27 @@ async function main() {
                     playerA[round.round+1] = '1';
                     playerB[round.round+1] = '0';
                     playerA[rounds+2] += 1;
+                    if (playerA[1] === data['match-information']['team1-name']) {
+                        data['match-information']['team1-score'] += 1;
+                    } else if (playerA[1] === data['match-information']['team2-name']) {
+                        data['match-information']['team2-score'] += 1;
+                    }
                 } else if (game.result == 1) {
                     playerA[round.round+1] = '0';
                     playerB[round.round+1] = '1';
                     playerB[rounds+2] += 1;
+                    if (playerB[1] === data['match-information']['team1-name']) {
+                        data['match-information']['team1-score'] += 1;
+                    } else if (playerB[1] === data['match-information']['team2-name']) {
+                        data['match-information']['team2-score'] += 1;
+                    }
                 } else if (game.result == 2) {
                     playerA[round.round+1] = '1/2';
                     playerB[round.round+1] = '1/2';
                     playerA[rounds+2] += 0.5;
                     playerB[rounds+2] += 0.5;
+                    data['match-information']['team1-score'] += 0.5;
+                    data['match-information']['team2-score'] += 0.5;
                 }
             }
         }
@@ -189,6 +200,11 @@ async function main() {
             }
             dataTable.appendChild(row);
         }
+
+        // Update Team Scores
+        const teamScores = document.querySelector("#team-scores");
+        teamScores.textContent = `${data["match-information"]["team1-name"]} ${data["match-information"]["team1-score"]} - ${data["match-information"]["team2-score"]}  ${data["match-information"]["team2-name"]}`
+
     }
     updateTableData();
 
@@ -236,15 +252,44 @@ async function main() {
     toggleTimer(); // Start timer on page load
 
 
+    // ---------- SEND DATA ----------
+    // Function to send data to the JSONbin
+    async function sendData(packet) {
+        try {
+            const res = await fetch('https://api.jsonbin.io/v3/b/6542b49d12a5d376599392e1/', {
+            method: 'PUT',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(packet)
+            });
+            if (!res.ok) {
+            throw new Error(`Request failed with status code: ${res.status}`);
+            }
+            const data = await res.json();
+            console.log(data);
+            return(data);
+        } catch (error) {
+            console.error(error);
+            throw(error);
+        }
+    }
+
     // Continue button
     const continueButton = document.querySelector('#continue-button');
-    continueButton.addEventListener("click", () => {
-        const currentURL = window.location.href;
-        const relativePath = "/round-details.html"; 
-        newURL = currentURL.split('/');
-        newURL.pop();
-        newURL = newURL.join('/') + relativePath;
-        window.location.href = newURL;
+    continueButton.addEventListener('click', async () => {
+    try {
+        // increment round number
+        data['match-information']['current-round'] += 1;
+
+        // Wait for matchmaking and data to send to JSONbin
+        await(sendData(data));
+        window.location.href = "round-details.html"; // Direct to next page
+    }
+    catch (error) {
+        console.error("Error:", error);
+    }  
     });
 }
 
