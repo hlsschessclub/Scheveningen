@@ -143,8 +143,8 @@ async function main() {
 
         // Fill in tempData according to round results
         // Simultaneously accumulate total team scores
-        let teamATotal = 0;
-        let teamBTotal = 0;
+        let team1Total = 0;
+        let team2Total = 0;
         for (const round of data.schedule) {
             for (const game of round.games) {
                 const playerA = tempData.get(game.playerA.id);
@@ -156,29 +156,33 @@ async function main() {
                     playerB[round.round+1] = '0';
                     playerA[rounds+2] += 1;
                     if (playerA[1] === data['match-information']['team1-name']) {
-                        data['match-information']['team1-score'] += 1;
+                        team1Total += 1;
                     } else if (playerA[1] === data['match-information']['team2-name']) {
-                        data['match-information']['team2-score'] += 1;
+                        team2Total += 1;
                     }
                 } else if (game.result == 1) {
                     playerA[round.round+1] = '0';
                     playerB[round.round+1] = '1';
                     playerB[rounds+2] += 1;
                     if (playerB[1] === data['match-information']['team1-name']) {
-                        data['match-information']['team1-score'] += 1;
+                        team1Total += 1;
                     } else if (playerB[1] === data['match-information']['team2-name']) {
-                        data['match-information']['team2-score'] += 1;
+                        team2Total += 1;
                     }
                 } else if (game.result == 2) {
                     playerA[round.round+1] = '1/2';
                     playerB[round.round+1] = '1/2';
                     playerA[rounds+2] += 0.5;
                     playerB[rounds+2] += 0.5;
-                    data['match-information']['team1-score'] += 0.5;
-                    data['match-information']['team2-score'] += 0.5;
+                    team1Total += 0.5;
+                    team2Total += 0.5;
                 }
             }
         }
+
+        //
+        data['match-information']['team1-score'] = team1Total;
+        data['match-information']['team2-score'] = team2Total;
         
         // Sort map by score, descending.
         const sortedArray = Array.from(tempData);
