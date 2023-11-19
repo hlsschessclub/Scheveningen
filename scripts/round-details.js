@@ -115,6 +115,7 @@ async function main() {
     // };
 
     const data = await fetchData();
+    console.log(data);
 
     // Set header of page to round number
     const pageHeader = document.querySelector('#round-details-title');
@@ -181,29 +182,32 @@ async function main() {
         var playerBCell = document.getElementById(`player-b-board${board}`);
         var resultButton = document.getElementById(`board${board}-result`)
         var currentText = resultButton.innerHTML.trim();
+        let currentBoard = data.schedule[data['match-information']['current-round'] - 1].games[board-1];
 
         // Cycle through the different states
         if (currentText === "-") {
             resultButton.innerHTML = "1-0";
             playerACell.style.backgroundColor = "green";
             playerBCell.style.backgroundColor = "red";
+            currentBoard.result = 0;
         } else if (currentText === "1-0") {
             resultButton.innerHTML = "0-1";
             playerACell.style.backgroundColor = "red";
             playerBCell.style.backgroundColor = "green";
+            currentBoard.result = 1;
         } else if (currentText === "0-1") {
             resultButton.innerHTML = "1/2-1/2";
             playerACell.style.backgroundColor = "grey";
             playerBCell.style.backgroundColor = "grey";
+            currentBoard.result = 2;
         } else {
             resultButton.innerHTML = "-";
             playerACell.style.backgroundColor = "white";
             playerBCell.style.backgroundColor = "white";
+            currentBoard.result = -1;
         }
         // Update JSON object
     }
-
-    // Implement sorting based on scores prior to the creation of tables
 
     // ---------- SEND DATA ----------
     // Function to send data to the JSONbin
