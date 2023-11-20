@@ -239,7 +239,12 @@ async function main() {
     try {
         // Wait for matchmaking and data to send to JSONbin
         await(sendData(data));
-        window.location.href = "current-standings.html"; // Direct to next page
+        if (data['match-information']['current-round'] === 8) {
+            window.location.href = "final-standings.html"; // Direct to next page
+        }
+        else {
+            window.location.href = "current-standings.html"; // Direct to next page
+        }
     }
     catch (error) {
         console.error("Error:", error);

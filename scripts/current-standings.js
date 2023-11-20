@@ -127,7 +127,7 @@ async function main() {
         let totalPlayers = data["match-information"]["total-players"];
 
         // Create a temporary data object where player id is the key for each player
-        let tempData = new Map();
+        let dataMap = new Map();
 
         // Initialize tempData with player name and team
         for (let i = 0; i < totalPlayers; ++i) {
@@ -138,7 +138,7 @@ async function main() {
             curPlayerData[0] = fullName;
             curPlayerData[1] = team;
             curPlayerData[rounds+2] = 0; // A final column which is max score of the player.
-            tempData.set(data.players[i].id, curPlayerData);
+            dataMap.set(data.players[i].id, curPlayerData);
         }
 
         // Fill in tempData according to round results
@@ -147,8 +147,8 @@ async function main() {
         let team2Total = 0;
         for (const round of data.schedule) {
             for (const game of round.games) {
-                const playerA = tempData.get(game.playerA.id);
-                const playerB = tempData.get(game.playerB.id);
+                const playerA = dataMap.get(game.playerA.id);
+                const playerB = dataMap.get(game.playerB.id);
                 // Brian: not sure how the "result" variable maps. 
                 // Brian: I'll assume -1 = tbd, 0 = playerA wins, 1 = player B wins, and 2 = draw
                 if (game.result === 0) {
@@ -180,12 +180,12 @@ async function main() {
             }
         }
 
-        //
+        // Update team total scores
         data['match-information']['team1-score'] = team1Total;
         data['match-information']['team2-score'] = team2Total;
         
         // Sort map by score, descending.
-        const sortedArray = Array.from(tempData);
+        const sortedArray = Array.from(dataMap);
         sortedArray.sort((a, b) => b[1][rounds+2] - a[1][rounds+2]);
         // Pop total score.
         for (const item of sortedArray) {
