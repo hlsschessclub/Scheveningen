@@ -316,7 +316,7 @@ continueButton.addEventListener('click', async () => {
     await(sendData(data));
     window.location.href = "round-details.html"; // Direct to next page
   }
-  catch {
+  catch (error) {
     console.error("Error:", error);
   }  
 });
