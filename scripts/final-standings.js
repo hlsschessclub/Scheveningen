@@ -124,8 +124,8 @@ async function main() {
 
     // Create table with the data, sorting by total score
     function updateTableData() {
-        // Brian: I couldn't find a rounds variable in the data so I assume 8 is hard-coded
-        const rounds = 8;
+        
+        const rounds = data["match-information"]["team1-players"];
         let totalPlayers = data["match-information"]["total-players"];
 
         // Create a temporary data object where player id is the key for each player
@@ -233,8 +233,12 @@ async function main() {
         mvpLabel2.textContent = 'MVP: ' + dataMap.get(mvp2)[0];
 
         // Update Team Scores
+        const teamName1 = document.querySelector("#team-name-1");
         const teamScores = document.querySelector("#team-scores");
-        teamScores.textContent = `${data["match-information"]["team1-name"]} ${data["match-information"]["team1-score"]} - ${data["match-information"]["team2-score"]}  ${data["match-information"]["team2-name"]}`
+        const teamName2 = document.querySelector("#team-name-2");
+        teamName1.textContent = data["match-information"]["team1-name"]
+        teamScores.textContent = `${data["match-information"]["team1-score"]} - ${data["match-information"]["team2-score"]}`
+        teamName2.textContent = data["match-information"]["team2-name"]
     }
     updateTableData();
 

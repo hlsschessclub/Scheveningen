@@ -203,3 +203,21 @@ tr:nth-child(odd){
 #data-table tr:nth-child(4){
     background-color: #b08d57;
 }
+
+/* Styles for input screen */
+.win {
+    background-color: green;
+}
+
+.loss {
+    background-color: red;
+}
+
+.draw {
+    background-color: gray;
+}
+
+/* Current Standings */
+#scores {
+    width: 40vw;
+}
