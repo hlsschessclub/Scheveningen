@@ -10,7 +10,8 @@ p, h1, h2, div {
 
 /* General Styles */
 body {
-    background-color: #F5F3F4;
+    background-color: #ede0d4;
+    color:#38261A;
 }
 
 h1 {
@@ -91,21 +92,27 @@ table, td, th {
 }
 
 .standard-button {
-    background-color: #D3D3D3;
-    border: none;
+    background-color: #EAD6C3;
+    border: 0.1vw solid #38261A;
     border-radius: 0.3vw;
     padding: 0.3vw 0.7vw;
     transition: background-color 0.3s ease;
 }
 
 .standard-button:hover {
-    background-color: #AAAAAA;
+    background-color: #6E4D35;
 }
 
 .invisible-button {
     border: none;
     background: none;
     cursor: pointer;
+}
+th{
+    background-color:#986E4F;
+}
+tr:nth-child(odd){
+    background-color:#EAD6C3; 
 }
 
 /* Styles for input screen */
@@ -151,7 +158,7 @@ table, td, th {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: #ede0d4;
     padding: 1.5vw;
     border-radius: 0.5vw;
     max-width: 40vw;
@@ -176,8 +183,23 @@ table, td, th {
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
     font-weight: 500;
+    background-color: #fcfcf9;
 }
 
 #modal-button-wrapper {
     width: 25vw;
+}
+/* Current standings*/
+#team-scores{
+    font-family: 'Open Sans', sans-serif;
+}
+/* Final standings */
+#data-table tr:nth-child(2){
+    background-color: gold;
+}
+#data-table tr:nth-child(3){
+    background-color: silver;
+}
+#data-table tr:nth-child(4){
+    background-color: #b08d57;
 }

@@ -193,7 +193,7 @@ async function main() {
         }
 
         // Fill in html table with data
-        const dataTable = document.querySelector('#data-table');
+        const dataTable = document.querySelector('#current-data-table');
         for (const playerSet of sortedArray) {
             const row = document.createElement('tr');
             const playerData = playerSet[1];
