@@ -12,24 +12,24 @@
         <div id="input-screen-wrapper" class="flex-column flex-center">
             <h1>Input Team Information</h1>
             <div class="flex-center flex-grow-cross flex-space-evenly">
-                <div class="flex-column flex-center">
+                <div class="flex-column flex-center" id="team-1-column">
                     <p>Team 1</p>
                     <button class="invisible-button" id="team-name-button-1">
                         <h2 id="team-name-1">Change Name</h2>
                     </button>
-                    <div class="flex-column flex-center bordered">
+                    <div class="flex-column flex-center bordered" id="team-wrapper">
                         <div class="flex-column flex-center padding-small" id="team-list-1"></div>
-                        <button id="add-team-1">+</button>
+                        <button class="standard-button" id="add-team-1">+</button>
                     </div>
                 </div>
-                <div class="flex-column flex-center">
+                <div class="flex-column flex-center" id="team-2-column">
                     <p>Team 2</p>
                     <button class="invisible-button" id="team-name-button-2">
                         <h2 id="team-name-2">Change Name</h2>
                     </button>
-                    <div class="flex-column flex-center bordered">
+                    <div class="flex-column flex-center bordered" id="team-wrapper">
                         <div class="flex-column flex-center padding-small" id="team-list-2"></div>
-                        <button id="add-team-2">+</button>
+                        <button class="standard-button" id="add-team-2">+</button>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 <form>
                     <label for="team-name-input">Team Name:</label>
                     <input type="text" id="team-name-input"><br>
-                    <button id="team-modal-submit-button" type="button">Submit</button>
+                    <button class="standard-button" id="team-modal-submit-button" type="button">Submit</button>
                 </form>
                 </div>
             </div>    
@@ -55,7 +55,7 @@
                     <input type="text" id="last-name-input"><br>
                     <label for="grade-input">Grade:</label>
                     <input type="number" id="grade-input"><br>
-                    <button id="player-modal-submit-button" type="button">Submit</button>
+                    <button class="standard-button" id="player-modal-submit-button" type="button">Submit</button>
                 </form>
                 </div>
             </div>
@@ -70,12 +70,14 @@
                     <input type="text" id="last-name-update-input"><br>
                     <label for="grade-update-input">Grade:</label>
                     <input type="number" id="grade-update-input"><br>
-                    <button id="player-modal-update-submit-button" type="button">Submit</button>
-                    <button id="player-modal-update-delete-button" type="button">Delete Player</button>
+                    <div class="flex-space-evenly" id="modal-button-wrapper">
+                        <button class="standard-button" id="player-modal-update-submit-button" type="button">Update Player</button>
+                        <button class="standard-button" id="player-modal-update-delete-button" type="button">Delete Player</button>
+                    </div> 
                 </form>
                 </div>
             </div>
-            <button class="margin-medium" id="continue-button">Continue</button>
+            <button class="standard-button margin-medium" id="continue-button">Continue</button>
         </div>
     </main>
 
