@@ -187,26 +187,33 @@ async function main() {
         // Cycle through the different states
         if (currentText === "-") {
             resultButton.innerHTML = "1-0";
-            playerACell.style.backgroundColor = "green";
-            playerBCell.style.backgroundColor = "red";
+            playerACell.classList.remove('win', 'loss', 'draw');
+            playerACell.classList.add('loss');
+            playerBCell.classList.remove('win', 'loss', 'draw');
+            playerBCell.classList.add('win');
             currentBoard.result = 0;
         } else if (currentText === "1-0") {
             resultButton.innerHTML = "0-1";
-            playerACell.style.backgroundColor = "red";
-            playerBCell.style.backgroundColor = "green";
+            playerACell.classList.remove('win', 'loss', 'draw');
+            playerACell.classList.add('win');
+            playerBCell.classList.remove('win', 'loss', 'draw');
+            playerBCell.classList.add('loss');
             currentBoard.result = 1;
         } else if (currentText === "0-1") {
             resultButton.innerHTML = "1/2-1/2";
-            playerACell.style.backgroundColor = "grey";
-            playerBCell.style.backgroundColor = "grey";
+            playerACell.classList.remove('win', 'loss', 'draw');
+            playerACell.classList.add('draw');
+            playerBCell.classList.remove('win', 'loss', 'draw');
+            playerBCell.classList.add('draw');
             currentBoard.result = 2;
         } else {
             resultButton.innerHTML = "-";
-            playerACell.style.backgroundColor = "white";
-            playerBCell.style.backgroundColor = "white";
+            playerACell.classList.remove('win', 'loss', 'draw');
+            playerACell.classList.add('draw');
+            playerBCell.classList.remove('win', 'loss', 'draw');
+            playerBCell.classList.add('draw');
             currentBoard.result = -1;
         }
-        // Update JSON object
     }
 
     // ---------- SEND DATA ----------

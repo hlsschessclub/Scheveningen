@@ -181,3 +181,16 @@ table, td, th {
 #modal-button-wrapper {
     width: 25vw;
 }
+
+/* Styles for input screen */
+.win {
+    background-color: green;
+}
+
+.loss {
+    background-color: red;
+}
+
+.draw {
+    background-color: gray;
+}
