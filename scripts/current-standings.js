@@ -122,9 +122,7 @@ async function main() {
 
     // Create table with the data, sorting by total score
     function updateTableData() {
-        // Brian: I couldn't find a rounds variable in the data so I assume 8 is hard-coded
         const rounds = data["match-information"]["team1-players"];
-        console.log(rounds)
         let totalPlayers = data["match-information"]["total-players"];
 
         // Create a temporary data object where player id is the key for each player
