@@ -188,16 +188,16 @@ async function main() {
         if (currentText === "-") {
             resultButton.innerHTML = "1-0";
             playerACell.classList.remove('win', 'loss', 'draw');
-            playerACell.classList.add('loss');
+            playerACell.classList.add('win');
             playerBCell.classList.remove('win', 'loss', 'draw');
-            playerBCell.classList.add('win');
+            playerBCell.classList.add('loss');
             currentBoard.result = 0;
         } else if (currentText === "1-0") {
             resultButton.innerHTML = "0-1";
             playerACell.classList.remove('win', 'loss', 'draw');
-            playerACell.classList.add('win');
+            playerACell.classList.add('loss');
             playerBCell.classList.remove('win', 'loss', 'draw');
-            playerBCell.classList.add('loss');
+            playerBCell.classList.add('win');
             currentBoard.result = 1;
         } else if (currentText === "0-1") {
             resultButton.innerHTML = "1/2-1/2";

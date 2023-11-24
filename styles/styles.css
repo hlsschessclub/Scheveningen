@@ -194,3 +194,8 @@ table, td, th {
 .draw {
     background-color: gray;
 }
+
+/* Current Standings */
+#scores {
+    width: 40vw;
+}
