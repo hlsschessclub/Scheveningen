@@ -124,8 +124,7 @@ async function main() {
 
     // Create table with the data, sorting by total score
     function updateTableData() {
-        // Brian: I couldn't find a rounds variable in the data so I assume 8 is hard-coded
-        const rounds = 8;
+        const rounds = data["match-information"]["team1-players"];
         let totalPlayers = data["match-information"]["total-players"];
 
         // Create a temporary data object where player id is the key for each player
@@ -194,8 +193,23 @@ async function main() {
             item[1].pop();
         }
 
-        // Fill in html table with data
+        // Fill in html table header row
         const dataTable = document.querySelector('#data-table');
+        const headerRow = document.createElement('tr');
+        const playerHeaderCell = document.createElement('th');
+        playerHeaderCell.textContent = 'Player';
+        const teamHeaderCell = document.createElement('th');
+        teamHeaderCell.textContent = 'Team';
+        headerRow.append(playerHeaderCell);
+        headerRow.append(teamHeaderCell);
+        for (let i = 1; i <= rounds; ++i) {
+            const cell = document.createElement('th');
+            cell.textContent = 'Round ' + i;
+            headerRow.appendChild(cell);
+        }
+        dataTable.appendChild(headerRow);
+
+        // Fill in html table with data
         for (const playerSet of sortedArray) {
             const row = document.createElement('tr');
             const playerData = playerSet[1];
