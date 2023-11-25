@@ -37,10 +37,23 @@
             <div id="team-name-modal" class="modal">
                 <div class="modal-content">
                 <h2 id="team-name-modal-title">Enter Team Name</h2>
-                <form>
+                <form id = "team-name-input-form">
                     <label for="team-name-input">Team Name:</label>
-                    <input type="text" id="team-name-input"><br>
-                    <button id="team-modal-submit-button" type="button">Submit</button>
+                    <input 
+                        type="text" 
+                        id="team-name-input"
+                        maxlength="20"
+                        oninput="teamValidation()"><br>
+                    <button id="team-modal-submit-button" type="button" disabled>Submit</button>
+                    <script>
+                        function teamValidation(){
+                            var teamForm = document.getElementById('team-name-input-form')
+                            var button = teamForm.elements['team-modal-submit-button'];
+                            var teamName = teamForm.elements["team-name-input"].value;
+                            console.log(teamName)
+                            button.disabled = (teamName.trim() === "");
+                        }
+                    </script>
                 </form>
                 </div>
             </div>    
@@ -48,11 +61,28 @@
             <div id="player-information-modal" class="modal">
                 <div class="modal-content">
                 <h2 id="player-information-modal-title">Enter Player Information</h2>
-                <form>
-                    <input type="text" id="first-name-input" placeholder="First Name" onkeydown="return /[a-z]/i.test(event.key)" maxlength = "20" required /><br>
-                    <input type="text" id="last-name-input" placeholder = "Last Name" onkeydown="return /[a-z]/i.test(event.key)" maxlength = "20" required /><br>
-                    <input type="number" id="grade-input" placeholder = "Grade" min=9 max=12 required/><br>
-                    <button id="player-modal-submit-button" type="button">Submit</button>
+                <form id = "player-info-form">
+                    <input 
+                        type="text" 
+                        id="first-name-input" 
+                        placeholder="First Name" 
+                        onkeydown="return /[a-z]/i.test(event.key)"
+                        maxlength = "20" 
+                        onchange="validateForm('player-info-form')"><br>
+                    <input 
+                        type="text" 
+                        id="last-name-input" 
+                        placeholder = "Last Name" 
+                        onkeydown="return /[a-z]/i.test(event.key)"
+                        maxlength = "20"
+                        onchange="validateForm('player-info-form')"
+                        ><br>
+                    <input 
+                        type="number" 
+                        id="grade-input" 
+                        placeholder = "Grade" 
+                        onchange="validateForm('player-info-form')"><br>
+                    <button id="player-modal-submit-button" type="button" disabled>Submit</button>
                 </form>
                 </div>
             </div>
@@ -60,21 +90,45 @@
             <div id="player-information-update-modal" class="modal">
                 <div class="modal-content">
                 <h2 id="player-information-update-modal-title">Update Player Information</h2>
-                <form>
-                    <label for="first-name-update-input">First Name:</label>
-                    <input type="text" id="first-name-update-input" onkeydown="return /[a-z]/i.test(event.key)" maxlength="20" required/><br>
-                    <label for="last-name-update-input">Last Name:</label>
-                    <input type="text" id="last-name-update-input" onkeydown="return /[a-z]/i.test(event.key)" maxlength="20" required/><br>
-                    <label for="grade-update-input">Grade:</label>
-                    <input type="number" id="grade-update-input" min=9 max=12 required><br>
-                    <button id="player-modal-update-submit-button" type="button">Submit</button>
-                    <button id="player-modal-update-delete-button" type="button">Delete Player</button>
+                <form id = "player-update-form">
+                    <label for="first-name-input">First Name:</label>
+                    <input 
+                        type="text" 
+                        name="first-name-input" 
+                        onkeydown="return /[a-z]/i.test(event.key)" 
+                        maxlength="20" 
+                        onchange="validateForm('player-update-form')"/><br>
+                    <label for="last-name-input">Last Name:</label>
+                    <input 
+                        type="text" 
+                        id="last-name-input" 
+                        onkeydown="return /[a-z]/i.test(event.key)" 
+                        maxlength="20" 
+                        onchange="validateForm('player-update-form')"/><br>
+                    <label for="grade-input">Grade:</label>
+                    <input 
+                        type="number" 
+                        id="grade-input" 
+                        onchange="validateForm('player-update-form')"><br>
+                    <button id="player-modal-submit-button" type="button" disabled>Submit</button>
+                    <button id="player-modal-delete-button" type="button">Delete Player</button>
                 </form>
                 </div>
             </div>
             <button class="margin-medium" id="continue-button">Continue</button>
         </div>
     </main>
+    <script>
+        function validateForm(formID){
+            console.log("entered form");
+            var form = document.getElementById(formID);
+            var submitButton = form.elements["player-modal-submit-button"];
+            var fName = form.elements["first-name-input"].value;
+            var lName = form.elements["last-name-input"].value;
+            var grade = form.elements["grade-input"].value;
+            submitButton.disabled = (fName.trim() === "" || lName.trim() === "" || grade<9 || grade > 12);
 
+        }
+    </script>
 </body>
 </html>

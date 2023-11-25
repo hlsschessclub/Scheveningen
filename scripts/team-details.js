@@ -78,14 +78,15 @@ function openTeamNameModal(team) {
 }
 
 function updateTeamName(team) {
+  console.log("entered team update")
   // Change the header and update the json
+  var teamForm = document.getElementById('team-name-input-form')
+  var teamName = teamForm.elements['team-name-input'].value;
   if (team == 1) {
-    var teamName = document.getElementById('team-name-input').value;
     headerTeam1.textContent = teamName
     data["match-information"]["team1-name"] = teamName;
   }
   else {
-    var teamName = document.getElementById('team-name-input').value;
     headerTeam2.textContent = teamName
     data["match-information"]["team2-name"] = teamName;
   }
@@ -130,9 +131,10 @@ function openAddPlayerModal(team) {
 
 function addPlayer(team) {
   // Get player information from the modal
-  var fName = document.getElementById('first-name-input').value;
-  var lName = document.getElementById('last-name-input').value;
-  var grade = document.getElementById('grade-input').value;
+  var addForm = document.getElementById('player-info-form');
+  var fName = addForm.elements['first-name-input'].value;
+  var lName = addForm.elements['last-name-input'].value;
+  var grade = addForm.elements['grade-input'].value;
   var id = data["match-information"]["total-players"] + 1;
   // Update the JSON
   let newPlayer = {
@@ -148,7 +150,7 @@ function addPlayer(team) {
   data["match-information"]["total-players"] = data.players.length;
   data["match-information"][`team${team}-players`]++;
 
-  // Create a new button to submit
+  // Create a new button to change each player's name
   var newButton = document.createElement("button");
   newButton.textContent = `${fName} ${lName}`;
   newButton.id = id
@@ -171,17 +173,20 @@ function openUpdatePLayerModal(id){
   // Change title of modal depending on which player is being selected
   var modalTitle = document.getElementById('player-information-update-modal-title')
   modalTitle.textContent = `Update information for player ${player["first-name"]} ${player["last-name"]}`;
+  var updateForm = document.getElementById('player-update-form');
 
   // Access the current player data and set the input boxes to that text
-  document.getElementById('first-name-update-input').value = player["first-name"];
-  document.getElementById('last-name-update-input').value = player["last-name"];
-  document.getElementById('grade-update-input').value = player["grade"];
+  updateForm.elements['first-name-input'].value = player["first-name"];
+  updateForm.elements['last-name-input'].value = player["last-name"];
+  updateForm.elements['grade-input'].value = player["grade"];
   
   //Set the submit button to update the player on the team
-  var modalButton = document.getElementById('player-modal-update-submit-button')
-  modalButton.onclick = function() {updatePlayer(player)};
+  var modalButton = updateForm.elements['player-modal-submit-button'];
+  modalButton.onclick = function() 
+    {updatePlayer(player,updateForm)
+  };
 
-  var deletePlayerButton = document.getElementById('player-modal-update-delete-button');
+  var deletePlayerButton = updateForm.elements['player-modal-delete-button'];
   deletePlayerButton.onclick = function() {deletePlayer(player["id"]-1)}; //sends the index of the player in the JSON  
 
   // Close modal if user clicks off
@@ -192,10 +197,10 @@ function openUpdatePLayerModal(id){
   }
 }
 
-function updatePlayer(player) {
-  var fName = document.getElementById('first-name-update-input').value;
-  var lName = document.getElementById('last-name-update-input').value;
-  var grade = document.getElementById('grade-update-input').value;
+function updatePlayer(player,updateForm) {
+  var fName = updateForm.elements['first-name-input'].value;
+  var lName = updateForm.elements['last-name-input'].value;
+  var grade = updateForm.elements['grade-input'].value;
 
   // Set new values
   player["first-name"] = fName;
