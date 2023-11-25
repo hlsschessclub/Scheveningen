@@ -106,10 +106,6 @@ function openAddPlayerModal(team) {
   // Make entire modal visible
   var modal = document.getElementById('player-information-modal');
   modal.style.display = 'block';
-  
-  // Change title of modal depending on which team is getting a new player
-  var modalTitle = document.getElementById('player-information-modal-title')
-  modalTitle.textContent = "Enter Information for Player on Team " + team;
 
   // Set all boxes to blank
   document.getElementById('first-name-input').value = "";
@@ -170,7 +166,7 @@ function openUpdatePLayerModal(id){
 
   // Change title of modal depending on which player is being selected
   var modalTitle = document.getElementById('player-information-update-modal-title')
-  modalTitle.textContent = `Update information for player ${player["first-name"]} ${player["last-name"]}`;
+  modalTitle.textContent = `Update Information for ${player["first-name"]} ${player["last-name"]}`;
 
   // Access the current player data and set the input boxes to that text
   document.getElementById('first-name-update-input').value = player["first-name"];

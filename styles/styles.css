@@ -1,25 +1,44 @@
+/* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+/* Reset margin and padding */
 p, h1, h2, div {
     padding: 0;
     margin: 0;
 }
 
+/* General Styles */
+body {
+    background-color: #ede0d4;
+    color:#38261A;
+}
+
 h1 {
     font-size: 3vw;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
     margin: 1vw;
 }
 
 h2 {
-    font-size: 2vw;
+    font-size: 2.2vw;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
 }
 
 p {
     font-size: 1.3vw;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
     padding: 0.5vw;
 }
 
-button {
+button { 
     font-size: 1.3vw;
-    margin: 0.5vw;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 table, td, th {
@@ -57,6 +76,7 @@ table, td, th {
 
 .bordered {
     border: 0.1vw solid black;
+    border-radius: 0.3vw;
 }
 
 .margin-small {
@@ -71,17 +91,58 @@ table, td, th {
     padding: 1.5vw;
 }
 
+.standard-button {
+    background-color: #EAD6C3;
+    border: 0.1vw solid #38261A;
+    border-radius: 0.3vw;
+    padding: 0.3vw 0.7vw;
+    transition: background-color 0.3s ease;
+}
+
+.standard-button:hover {
+    background-color: #6E4D35;
+}
+
 .invisible-button {
     border: none;
     background: none;
     cursor: pointer;
 }
+th{
+    background-color:#986E4F;
+}
+tr:nth-child(odd){
+    background-color:#EAD6C3; 
+}
 
+/* Styles for input screen */
 #input-screen-wrapper {
     width: 60vw;
 }
 
-/* Styles for prompt forms ***TEMPORARY*** */
+#team-1-column, #team-2-column {
+    width: 30vw;
+}
+
+#team-wrapper {
+    margin: 1vw;
+    padding: 0.5vw 0 0.5vw 0;
+    width: 18vw;
+}
+
+#team-list-1, #team-list-2 {
+    margin: 0;
+    width: 80%;
+    max-height: 40vh;
+    overflow-y: auto;
+}
+
+#team-list-1 button, #team-list-2 button{
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    margin: 0.5vw;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -89,13 +150,74 @@ table, td, th {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
 }
+
 .modal-content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
+    background-color: #ede0d4;
+    padding: 1.5vw;
+    border-radius: 0.5vw;
+    max-width: 40vw;
+}
+
+.modal-content form {
+    padding-top: 0.3vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-content label {
+    margin-bottom: 0.5vw;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 0.5vw;
+    border-radius: 0.3vw;
+    border: 1px solid #AAAAAA;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    background-color: #fcfcf9;
+}
+
+#modal-button-wrapper {
+    width: 25vw;
+}
+/* Current standings*/
+#team-scores{
+    font-family: 'Open Sans', sans-serif;
+}
+/* Final standings */
+#data-table tr:nth-child(2){
+    background-color: gold;
+}
+#data-table tr:nth-child(3){
+    background-color: silver;
+}
+#data-table tr:nth-child(4){
+    background-color: #b08d57;
+}
+
+/* Styles for input screen */
+.win {
+    background-color: green;
+}
+
+.loss {
+    background-color: red;
+}
+
+.draw {
+    background-color: gray;
+}
+
+/* Current Standings */
+#scores {
+    width: 40vw;
 }

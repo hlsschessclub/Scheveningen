@@ -11,9 +11,14 @@
     <main class="flex-center">
         <div id="cstandings-screen-wrapper" class="flex-column flex-center">
             <h1>Current Standings</h1>
+            <div class="flex-space-evenly" id="scores">
+                <h1 id="team-name-1"></h1>
+                <h1 id="team-scores"></h1> 
+                <h1 id="team-name-2"></h1>
+            </div>
             <h2 id="round-header"></h2>
             <h1 id="team-scores"></h1>
-            <table id="data-table">
+            <table id="current-data-table">
                 <tr>
                     <th>Player</th>
                     <th>Team</th>
@@ -36,7 +41,7 @@
                 </button>
             </div>
 
-            <button class="margin-medium" id="continue-button">Continue</button>
+            <button class="margin-medium standard-button" id="continue-button">Continue</button>
         </div>
     </main>
 
