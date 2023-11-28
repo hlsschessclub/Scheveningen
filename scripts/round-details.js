@@ -209,9 +209,7 @@ async function main() {
         } else {
             resultButton.innerHTML = "-";
             playerACell.classList.remove('win', 'loss', 'draw');
-            playerACell.classList.add('draw');
             playerBCell.classList.remove('win', 'loss', 'draw');
-            playerBCell.classList.add('draw');
             currentBoard.result = -1;
         }
     }

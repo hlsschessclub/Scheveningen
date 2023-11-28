@@ -38,6 +38,7 @@ button {
     font-size: 1.3vw;
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
+    color:#38261A;
     cursor: pointer;
 }
 
@@ -47,6 +48,11 @@ table, td, th {
     border-collapse: collapse;
     padding: 0.5vw;
     text-align: center;
+}
+
+.serif {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
 }
 
 .flex-center {
@@ -189,35 +195,46 @@ tr:nth-child(odd){
 #modal-button-wrapper {
     width: 25vw;
 }
+
+/* Round Details */
+.win {
+    background-color: rgba(60, 179, 113, 0.75);
+}
+
+.loss {
+    background-color: rgba(231, 60, 83, 0.6);
+}
+
+.draw {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
 /* Current standings*/
 #team-scores{
     font-family: 'Open Sans', sans-serif;
 }
+
+#scores {
+    width: 40vw;
+}
+
 /* Final standings */
+#mvps {
+    width: 60vw;
+}
+
+#mvp-label-1, #mvp-label-2 {
+    max-width: 30vw;
+}
+
 #data-table tr:nth-child(2){
     background-color: gold;
 }
+
 #data-table tr:nth-child(3){
     background-color: silver;
 }
+
 #data-table tr:nth-child(4){
     background-color: #b08d57;
-}
-
-/* Styles for input screen */
-.win {
-    background-color: green;
-}
-
-.loss {
-    background-color: red;
-}
-
-.draw {
-    background-color: gray;
-}
-
-/* Current Standings */
-#scores {
-    width: 40vw;
 }
