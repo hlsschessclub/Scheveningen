@@ -246,7 +246,8 @@ async function main() {
     try {
         // Wait for matchmaking and data to send to JSONbin
         await(sendData(data));
-        if (data['match-information']['current-round'] === 8) {
+        const rounds = data["match-information"]["team1-players"];
+        if (data['match-information']['current-round'] === rounds) {
             window.location.href = "final-standings.html"; // Direct to next page
         }
         else {
