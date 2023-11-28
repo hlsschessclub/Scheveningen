@@ -192,7 +192,7 @@ async function main() {
         }
 
         // Fill in html table header row
-        const dataTable = document.querySelector('#data-table');
+        const dataTable = document.querySelector('#current-data-table');
         const headerRow = document.createElement('tr');
         const playerHeaderCell = document.createElement('th');
         playerHeaderCell.textContent = 'Player';
@@ -200,14 +200,14 @@ async function main() {
         teamHeaderCell.textContent = 'Team';
         headerRow.append(playerHeaderCell);
         headerRow.append(teamHeaderCell);
+      
         for (let i = 1; i <= rounds; ++i) {
             const cell = document.createElement('th');
             cell.textContent = 'Round ' + i;
             headerRow.appendChild(cell);
         }
         dataTable.appendChild(headerRow);
-
-        // Fill in html table with data
+      
         for (const playerSet of sortedArray) {
             const row = document.createElement('tr');
             const playerData = playerSet[1];
@@ -220,9 +220,12 @@ async function main() {
         }
 
         // Update Team Scores
+        const teamName1 = document.querySelector("#team-name-1");
         const teamScores = document.querySelector("#team-scores");
-        teamScores.textContent = `${data["match-information"]["team1-name"]} ${data["match-information"]["team1-score"]} - ${data["match-information"]["team2-score"]}  ${data["match-information"]["team2-name"]}`
-
+        const teamName2 = document.querySelector("#team-name-2");
+        teamName1.textContent = data["match-information"]["team1-name"]
+        teamScores.textContent = `${data["match-information"]["team1-score"]} - ${data["match-information"]["team2-score"]}`
+        teamName2.textContent = data["match-information"]["team2-name"]
     }
     updateTableData();
 

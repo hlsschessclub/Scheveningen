@@ -247,8 +247,12 @@ async function main() {
         mvpLabel2.textContent = 'MVP: ' + dataMap.get(mvp2)[0];
 
         // Update Team Scores
+        const teamName1 = document.querySelector("#team-name-1");
         const teamScores = document.querySelector("#team-scores");
-        teamScores.textContent = `${data["match-information"]["team1-name"]} ${data["match-information"]["team1-score"]} - ${data["match-information"]["team2-score"]}  ${data["match-information"]["team2-name"]}`
+        const teamName2 = document.querySelector("#team-name-2");
+        teamName1.textContent = data["match-information"]["team1-name"]
+        teamScores.textContent = `${data["match-information"]["team1-score"]} - ${data["match-information"]["team2-score"]}`
+        teamName2.textContent = data["match-information"]["team2-name"]
     }
     updateTableData();
 
