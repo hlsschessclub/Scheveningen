@@ -248,10 +248,10 @@ async function main() {
         await(sendData(data));
         const rounds = data["match-information"]["team1-players"];
         if (data['match-information']['current-round'] === rounds) {
-            window.location.href = "final-standings.html"; // Direct to next page
+            window.location.href = "/final-standings"; // Direct to next page
         }
         else {
-            window.location.href = "current-standings.html"; // Direct to next page
+            window.location.href = "/current-standings"; // Direct to next page
         }
     }
     catch (error) {

@@ -306,7 +306,7 @@ async function main() {
 
         // Wait for matchmaking and data to send to JSONbin
         await(sendData(data));
-        window.location.href = "round-details.html"; // Direct to next page
+        window.location.href = "/round-details"; // Direct to next page
     }
     catch (error) {
         console.error("Error:", error);
